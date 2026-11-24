@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="ClearBuildFiles.bat" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/">
+    <File Path=".github/FUNDING.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/setup/">
+    <File Path="setup/setup.iss" />
+  </Folder>
+  <Project Path="src/ScreenSketcher/ScreenSketcher.csproj" />
+</Solution>
