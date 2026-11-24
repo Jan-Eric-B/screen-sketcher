@@ -4,6 +4,8 @@
 #define MyAppExeName "ScreenSketcher.exe"
 #define MyAppIcon "..\src\ScreenSketcher\Resources\Icons\Icon.ico"
 #define MyAppId "com.je.screensketcher"
+; Output of: dotnet publish src/ScreenSketcher/ScreenSketcher.csproj -c Release -o publish
+#define BuildDir "..\publish"
 
 [Setup]
 AppId={#MyAppId}
@@ -29,20 +31,16 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 Name: "startup"; Description: "Start automatically at Windows startup"; GroupDescription: "Windows Startup";
 
-[Files]
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\ColorPicker.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\CommunityToolkit.Mvvm.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\Ookii.Dialogs.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\ScreenSketcher.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\ScreenSketcher.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\bin\Release\net8.0-windows\ScreenSketcher.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\src\ScreenSketcher\Resources\Icons\Icon.ico"; DestDir: "{app}\Resources\Icons"; Flags: ignoreversion
+[InstallDelete]
+; Remove files left by older framework-dependent versions (0.0.2 and earlier)
+Type: files; Name: "{app}\*.dll"
+Type: files; Name: "{app}\ScreenSketcher.deps.json"
+Type: files; Name: "{app}\ScreenSketcher.runtimeconfig.json"
+Type: filesandordirs; Name: "{app}\Resources"
 
-[Dirs]
-Name: "{app}\Resources"
-Name: "{app}\Resources\Icons"
+[Files]
+; Self-contained single file, no other files needed
+Source: "{#BuildDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
